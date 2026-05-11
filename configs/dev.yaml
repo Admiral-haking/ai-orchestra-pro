@@ -1,0 +1,15 @@
+# Overrides for development
+observability:
+  otel:
+    enabled: false
+
+limits:
+  requests_per_minute: 30
+
+providers:
+  default: dummy
+  routing:
+    research: dummy:local
+    analysis: dummy:local
+    writing: dummy:local
+    critic: dummy:local

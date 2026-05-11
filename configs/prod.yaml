@@ -1,0 +1,8 @@
+# Overrides for production
+observability:
+  otel:
+    enabled: true
+
+limits:
+  requests_per_minute: 120
+

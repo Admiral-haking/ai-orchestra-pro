@@ -1,0 +1,28 @@
+app:
+  name: ai-orchestra-pro
+  env: ${APP_ENV:dev}
+  locale: fa-IR
+
+providers:
+  default: openai
+  routing:
+    research: openai:gpt-3.5-turbo-0125
+    analysis: deepseek:deepseek-reasoner
+    writing: openai:gpt-3.5-turbo-0125
+    critic: deepseek:deepseek-chat
+
+limits:
+  requests_per_minute: 60
+  max_tokens: 4096
+
+observability:
+  otel:
+    enabled: true
+    exporter: otlp
+    endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://otel-collector:4317}
+
+security:
+  pii_redaction: true
+  tool_allowlist:
+    - web_browse
+    - python_exec

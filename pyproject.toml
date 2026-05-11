@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling>=1.21.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ai-orchestra-pro"
+version = "0.1.0"
+description = "Enterprise-grade multi-agent orchestration with provider-agnostic LLM routing"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [{ name = "AI-Orchestra Team" }]
+keywords = ["llm", "agents", "orchestration", "ai", "fastapi"]
+dependencies = [
+  "pydantic>=2.7",
+  "tenacity>=8.2",
+  "requests>=2.31",
+  "structlog>=24.1",
+  "fastapi>=0.111",
+  "uvicorn[standard]>=0.30",
+  "opentelemetry-sdk>=1.26",
+  "opentelemetry-exporter-otlp>=1.26",
+  "python-dotenv>=1.0",
+  "openai>=1.40",
+  "langgraph>=0.2.35",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3",
+  "mypy>=1.11",
+  "ruff>=0.6.2",
+  "black>=24.8",
+  "bandit>=1.7.9",
+  "types-requests>=2.32",
+  "types-PyYAML>=6.0",
+]
+
+[project.scripts]
+ai-orchestra-pro = "src.app:cli"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+lint.select = ["E", "F", "I", "B", "UP", "S"]
+lint.ignore = ["S101", "S102", "E501"]
+exclude = [".venv", "venv", "dist", "build"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
